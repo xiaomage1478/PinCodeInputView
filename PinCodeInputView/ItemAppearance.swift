@@ -18,6 +18,8 @@ public struct ItemAppearance {
     public let cursorColor: UIColor
     public let cornerRadius: CGFloat
 	public let borderColor: UIColor
+    public let highlightBorderColor: UIColor
+
     
     public init(
         itemSize: CGSize,
@@ -27,6 +29,7 @@ public struct ItemAppearance {
         highlightBackgroundColor: UIColor,
         cursorColor: UIColor,
         cornerRadius: CGFloat,
+        highlightBorderColor: UIColor = UIColor.clear,
 		borderColor: UIColor = UIColor.clear) {
         
         self.itemSize = itemSize
@@ -37,5 +40,6 @@ public struct ItemAppearance {
         self.cursorColor = cursorColor
         self.cornerRadius = cornerRadius
 		self.borderColor = borderColor
+        self.highlightBorderColor = highlightBorderColor
     }
 }

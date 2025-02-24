@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     // default item view
     let pinCodeInputView: PinCodeInputView<ItemView> = .init(
         digit: 6,
-        itemSpacing: 8,
+        itemSpacing: 10,
         itemFactory: {
             return ItemView()
     },
@@ -81,7 +81,8 @@ class ViewController: UIViewController {
                 highlightBackgroundColor: UIColor(red: 186/255.0, green: 212/255.0, blue: 255/255.0, alpha: 0.8),
                 cursorColor: UIColor(red: 69/255, green: 108/255, blue: 1, alpha: 1),
                 cornerRadius: 4,
-                borderColor: UIColor(red: 38/255.0, green: 86/255.0, blue: 235/255.0, alpha: 1)
+                highlightBorderColor: UIColor(red: 38/255.0, green: 86/255.0, blue: 235/255.0, alpha: 1),
+                borderColor:.white
             )
         )
         

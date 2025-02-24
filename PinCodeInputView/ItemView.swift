@@ -28,9 +28,11 @@ public class ItemView: UIView, ItemType {
             cursor.isHidden = isHiddenCursor
 			if (isHiddenCursor) {
                 self.backgroundColor = _appearance?.backgroundColor
-				self.layer.borderWidth = 0
+                self.layer.borderColor = _appearance?.borderColor.cgColor
+				self.layer.borderWidth = 1
 			} else {
                 self.backgroundColor = _appearance?.highlightBackgroundColor
+                self.layer.borderColor = _appearance?.highlightBorderColor.cgColor
 				self.layer.borderWidth = 1
 			}
         }
