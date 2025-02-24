@@ -54,27 +54,36 @@ public class ItemView: UIView, ItemType {
         label.isUserInteractionEnabled = false
         
         cursor.isHidden = true
-        
-        UIView.animateKeyframes(
-            withDuration: 1.6,
-            delay: 0.8,
-            options: [.repeat],
-            animations: {
-                UIView.addKeyframe(
-                    withRelativeStartTime: 0,
-                    relativeDuration: 0.2,
-                    animations: {
-                        self.cursor.alpha = 0
-                })
-                UIView.addKeyframe(
-                    withRelativeStartTime: 0.8,
-                    relativeDuration: 0.2,
-                    animations: {
-                        self.cursor.alpha = 1
-                })
-        },
-            completion: nil
-        )
+        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBack), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        becomeActive()
+
+    }
+    
+    /// 闪烁动画
+    fileprivate var opacityAnimation: CABasicAnimation = {
+        let opacityAnimation = CABasicAnimation.init(keyPath: "opacity")
+        opacityAnimation.fromValue = 1.0
+        opacityAnimation.toValue = 0.0
+        opacityAnimation.duration = 0.9
+        opacityAnimation.repeatCount = HUGE
+        opacityAnimation.isRemovedOnCompletion = true
+        opacityAnimation.fillMode = .forwards
+        opacityAnimation.timingFunction = CAMediaTimingFunction.init(name: .linear)
+        return opacityAnimation
+    }()
+    
+    
+    /// 去后台
+    @objc fileprivate func enterBack() {
+        // 移除动画
+        cursor.layer.removeAnimation(forKey: "kOpacityAnimation")
+    }
+    
+    /// 回前台
+    @objc fileprivate func becomeActive() {
+        // 重新添加动画
+        cursor.layer.add(opacityAnimation, forKey: "kOpacityAnimation")
     }
     
     required init?(coder aDecoder: NSCoder) {
