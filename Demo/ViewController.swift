@@ -65,10 +65,10 @@ class ViewController: UIViewController {
         titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         titleLabel.textColor = UIColor.lightText
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 56, height: 60)
-        titleLabel.center = CGPoint(x: view.center.x, y: view.center.y - 94)
+        titleLabel.center = CGPoint(x: view.center.x, y: view.center.y - 124)
 
         pinCodeInputView.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 56, height: 80)
-        pinCodeInputView.center = view.center
+        pinCodeInputView.center = CGPoint(x: view.center.x, y: view.center.y - 30)
         pinCodeInputView.set(changeTextHandler: { text in
             print(text)
         })
