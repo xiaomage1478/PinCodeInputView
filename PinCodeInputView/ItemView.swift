@@ -27,8 +27,10 @@ public class ItemView: UIView, ItemType {
         didSet {
             cursor.isHidden = isHiddenCursor
 			if (isHiddenCursor) {
+                self.backgroundColor = _appearance?.backgroundColor
 				self.layer.borderWidth = 0
 			} else {
+                self.backgroundColor = _appearance?.highlightBackgroundColor
 				self.layer.borderWidth = 1
 			}
         }
@@ -93,7 +95,10 @@ public class ItemView: UIView, ItemType {
         )
     }
     
+    private var _appearance: ItemAppearance?
+    
     public func set(appearance: ItemAppearance) {
+        _appearance = appearance
         bounds.size = appearance.itemSize
         label.font = appearance.font
         label.textColor = appearance.textColor

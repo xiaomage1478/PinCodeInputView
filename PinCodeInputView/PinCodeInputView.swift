@@ -124,7 +124,7 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
     public func set(appearance: ItemAppearance) {
         self.appearance = appearance
 		if autoResizes {
-			self.appearance = ItemAppearance(itemSize: CGSize(width: (self.bounds.width - (self.itemSpacing * CGFloat(self.digit))) / CGFloat(self.digit), height: appearance.itemSize.height), font: appearance.font, textColor: appearance.textColor, backgroundColor: appearance.backgroundColor, cursorColor: appearance.cursorColor, cornerRadius: appearance.cornerRadius, borderColor: appearance.borderColor)
+            self.appearance = ItemAppearance(itemSize: CGSize(width: (self.bounds.width - (self.itemSpacing * CGFloat(self.digit))) / CGFloat(self.digit), height: appearance.itemSize.height), font: appearance.font, textColor: appearance.textColor, backgroundColor: appearance.backgroundColor, highlightBackgroundColor: appearance.highlightBackgroundColor, cursorColor: appearance.cursorColor, cornerRadius: appearance.cornerRadius, borderColor: appearance.borderColor)
 		}
         items.forEach { $0.itemView.set(appearance: appearance) }
     }

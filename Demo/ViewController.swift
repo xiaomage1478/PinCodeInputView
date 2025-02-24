@@ -74,13 +74,14 @@ class ViewController: UIViewController {
         })
         pinCodeInputView.set(
             appearance: .init(
-                itemSize: CGSize(width: 44, height: 68),
-                font: .systemFont(ofSize: 28, weight: .bold),
-                textColor: .white,
-                backgroundColor: UIColor.white.withAlphaComponent(0.3),
+                itemSize: CGSize(width: 48, height: 48),
+                font: .systemFont(ofSize: 20, weight: .bold),
+                textColor: .black,
+                backgroundColor: UIColor.white.withAlphaComponent(0.8),
+                highlightBackgroundColor: UIColor(red: 186/255.0, green: 212/255.0, blue: 255/255.0, alpha: 0.8),
                 cursorColor: UIColor(red: 69/255, green: 108/255, blue: 1, alpha: 1),
-                cornerRadius: 8,
-				borderColor: UIColor.red
+                cornerRadius: 4,
+                borderColor: UIColor(red: 38/255.0, green: 86/255.0, blue: 235/255.0, alpha: 1)
             )
         )
         
