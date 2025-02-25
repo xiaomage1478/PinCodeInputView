@@ -33,6 +33,11 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
     public var hasText: Bool {
         return !(text.isEmpty)
     }
+    
+    public var currentFocusIndex: Int {
+        if isFilled { return 0 }
+        return text.count
+    }
 
     override public var intrinsicContentSize: CGSize {
         return stackView.bounds.size
@@ -86,6 +91,42 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
         stackView.spacing = itemSpacing
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
+        setupGestures()
+    }
+    
+    
+    private func setupGestures() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        self.addGestureRecognizer(longPressGesture)
+    }
+    
+    // MARK: - Long Press Handler
+    
+    @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            becomeFirstResponder()
+            // 显示粘贴菜单
+            
+            let menu = UIMenuController.shared
+            menu.menuItems = [UIMenuItem(title: "粘贴", action: #selector(pasteText))]
+            let focusView = self.items[currentFocusIndex]
+            let targetFrame = focusView.convert(focusView.bounds, to: self)
+            menu.setTargetRect(targetFrame, in: self)
+            menu.setMenuVisible(true, animated: true)
+        }
+    }
+    
+    @objc private func pasteText() {
+        if let pasteString = UIPasteboard.general.string {
+            set(text: pasteString)
+        }
+    }
+    
+    public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(pasteText) {
+            return UIPasteboard.general.string != nil
+        }
+        return false
     }
     
     required init?(coder aDecoder: NSCoder) {
