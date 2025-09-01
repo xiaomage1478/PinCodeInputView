@@ -26,6 +26,8 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
         return text.isEmpty
     }
     
+    public var canPaste: Bool = true
+    
     public var isFilled: Bool {
         return text.count == digit
     }
@@ -103,7 +105,7 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
     // MARK: - Long Press Handler
     
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
+        if gesture.state == .began && canPaste {
             becomeFirstResponder()
             // 显示粘贴菜单
             
@@ -160,6 +162,10 @@ public class PinCodeInputView<T: UIView & ItemType>: UIControl, UITextInputTrait
 
     public func set(changeTextHandler: @escaping (String) -> ()) {
         self.changeTextHandler = changeTextHandler
+    }
+    
+    public func clear() {
+        self.text = ""
     }
     
     public func set(appearance: ItemAppearance) {
